@@ -16,16 +16,17 @@ def start_game():
     if want_to_play == "y":
         # Define random number range and counter variables
         random_low = 1
-        random_high = 5
+        random_high = 10
         random_number = random.randint(random_low, random_high)
-        current_low_score = 0
+        current_high_score = 0
 
         # Handle low score logic if it hasn't been set yet
-        if current_low_score == 0:
+        if current_high_score == 0:
             print(
-                "\nThe current low score hasn't been set yet, you're the first player!")
+                "\nThe current high score hasn't been set yet, you're the first player!")
         else:
-            print("The current low score is {}, goodluck!".format(current_low_score))
+            print("The current high score is {}, goodluck!".format(
+                current_high_score))
 
         # Tell the player what the number range they need to guess in
         print("\nThe random number is somewhere between {} and {}".format(
@@ -53,10 +54,10 @@ def start_game():
                     print("\nGot it!\n")
                     print("It took you {} attempts to get it right!\n".format(
                         attempt_counter))
-                    if current_low_score == 0 or current_low_score > attempt_counter:
-                        current_low_score = attempt_counter
+                    if current_high_score == 0 or current_high_score > attempt_counter:
+                        current_high_score = attempt_counter
                     print("The current low score is {}\n".format(
-                        current_low_score))
+                        current_high_score))
                     print(
                         "<=========================================================>\n")
                     play_again = input(
@@ -67,7 +68,7 @@ def start_game():
                         print("\nNo worries, thanks for playing!\n")
                         break
                     else:
-                        print("Please enter Y for Yes or N for No")
+                        print("\nPlease enter Y for Yes or N for No")
     elif want_to_play == 'n':
         print("That's a shame, maybe next time!\n")
     else:
