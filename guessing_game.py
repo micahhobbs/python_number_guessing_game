@@ -6,83 +6,73 @@ Project 1 - Number Guessing Game
 
 import random
 
+print("\n<===== Welcome to the Python Number Guessing Game! =====>")
+
 
 def start_game():
-    """Psuedo-code Hints
 
-    When the program starts, we want to:
-    ------------------------------------
-    1. Display an intro/welcome message to the player.
-    2. Store a random number as the answer/solution.
-    3. Continuously prompt the player for a guess.
-      a. If the guess greater than the solution, display to the player "It's lower".
-      b. If the guess is less than the solution, display to the player "It's higher".
+    want_to_play = input("\nDo you want to play? Y/N  ").lower()
 
-    4. Once the guess is correct, stop looping, inform the user they "Got it"
-         and show how many attempts it took them to get the correct number.
-    5. Let the player know the game is ending, or something that indicates the game is over.
-
-    ( You can add more features/enhancements if you'd like to. )
-    """
-    # write your code inside this function.
-
-    print("""
-    <===== Welcome to the Python Number Guessing Game! =====>
-    """)
-
-    want_to_play = input("Do you want to play? Y/N  ").lower()
-    print()
     if want_to_play == "y":
         # Define random number range and counter variables
         random_low = 1
         random_high = 5
         random_number = random.randint(random_low, random_high)
-
         current_low_score = 0
 
         # Handle low score logic if it hasn't been set yet
         if current_low_score == 0:
-            print("The current low score hasn't been set yet, you're the first player!\n")
+            print(
+                "\nThe current low score hasn't been set yet, you're the first player!")
         else:
             print("The current low score is {}, goodluck!".format(current_low_score))
+
+        # Tell the player what the number range they need to guess in
+        print("\nThe random number is somewhere between {} and {}".format(
+            random_low, random_high))
 
         # Continually prompt player for number
         attempt_counter = 0
         while True:
             try:
-                print("The random number is somewhere between {} and {}\n".format(
+                guess = int(input("\nWhat do you think the number is?  "))
+            except (ValueError, NameError):
+                print("\nSorry, you entered a strange value, please make sure it is a whole number between {} and {}".format(
                     random_low, random_high))
-                guess = int(input("What do you think the number is?  "))
-            except NameError:
-                print("Sorry, you entered a strange value, please try again\n")
             else:
                 if guess < random_low or guess > random_high:
-                    print("That's not in the correct range, try again!\n")
+                    print("\nThat's not in the correct range, try again!")
                 elif guess > random_number:
-                    print("It's lower\n")
+                    print("\nIt's lower")
                     attempt_counter += 1
                 elif guess < random_number:
-                    print("It's higher\n")
+                    print("\nIt's higher")
                     attempt_counter += 1
                 else:
                     attempt_counter += 1
-                    print("Got it!\n")
+                    print("\nGot it!\n")
                     print("It took you {} attempts to get it right!\n".format(
                         attempt_counter))
                     if current_low_score == 0 or current_low_score > attempt_counter:
                         current_low_score = attempt_counter
                     print("The current low score is {}\n".format(
                         current_low_score))
-                    print("<========================================>\n")
+                    print(
+                        "<=========================================================>\n")
                     play_again = input(
                         "Do you want to play again? Y/N  ").lower()
                     if play_again == "y":
                         attempt_counter = 0
-                    else:
+                    elif play_again == "n":
+                        print("\nNo worries, thanks for playing!\n")
                         break
-
-    else:
+                    else:
+                        print("Please enter Y for Yes or N for No")
+    elif want_to_play == 'n':
         print("That's a shame, maybe next time!\n")
+    else:
+        print("\nPlease enter Y for Yes or N for No")
+        start_game()
 
 
 if __name__ == '__main__':
