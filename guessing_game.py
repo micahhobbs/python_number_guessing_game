@@ -52,7 +52,7 @@ def start_game():
                 else:
                     attempt_counter += 1
                     print("\nGot it!\n")
-                    print("It took you {} attempts to get it right!\n".format(
+                    print("It took you {} attempt(s) to get it right!\n".format(
                         attempt_counter))
                     if current_high_score == 0 or current_high_score > attempt_counter:
                         current_high_score = attempt_counter
@@ -64,6 +64,7 @@ def start_game():
                         "Do you want to play again? Y/N  ").lower()
                     if play_again == "y":
                         attempt_counter = 0
+                        random_number = random.randint(random_low, random_high)
                     elif play_again == "n":
                         print("\nNo worries, thanks for playing!\n")
                         break
